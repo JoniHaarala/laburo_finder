@@ -1,15 +1,18 @@
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import Home from './components/pages/home';
+import InfoPage from './components/pages/infoPage';
+import './page404.css'
 
 const Head = () => {
   return (
-    <header className="bg-red-400 font-[Poppins,system-ui] mb-8 pt-3 md:mt-0 md:py-8">
+    <header className="font-[Poppins,system-ui] mb-8 pt-3 md:mt-0 md:py-8">
       <h1 className="font-bold text-2xl">Laburo <span className="font-light">Finder</span> </h1>
-      <nav>
+      {/* <nav>
         <ul>
           <li><Link to='/'>Home</Link></li>
           <li><Link to='/description'>description Page</Link></li>
         </ul>
-      </nav>
+      </nav> */}
       {/* despues agregar el toggle del darkMode desde el otro proyecto y 
       eliminar el NAV q es solo de prueba para el router*/}
     </header>
@@ -22,7 +25,22 @@ const Footer = () => {
     </footer>
   );
 }
-const DescPage = () => <h1 className='bg-green-500'>La DescPage pagina paaa</h1>
+
+const Error404 = () => {
+  return (
+    <section id="not-found">
+      <div id="title">&bull; 404 Error Page &bull;</div>
+      <div className="circles">
+        <p>404<br />
+          <small>PAGE NOT FOUND</small>
+        </p>
+        <span className="circle big"></span>
+        <span className="circle med"></span>
+        <span className="circle small"></span>
+      </div>
+    </section>
+  );
+}
 
 function App() {
   return (
@@ -31,9 +49,9 @@ function App() {
         <Head />
         <div>
           <Routes>
-            <Route path='/' element={<head />} />
-            <Route path='/description' element={<DescPage />} />
-            <Route path='*' element={<h1>error 404</h1>} />
+            <Route path='/' element={<Home />} />
+            <Route path='/description/:jobid' element={<InfoPage />} />
+            <Route path='*' element={<Error404 />} />
           </Routes>
         </div>
         <Footer />
