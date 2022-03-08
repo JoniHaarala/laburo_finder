@@ -1,17 +1,30 @@
-import React, {useState} from 'react';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import { useState } from "react";
 
-export default function CardPagination(data, val) {
-    
-    return (
-        <Stack className="my-10 items-end" spacing={2}>
-            <Pagination
-                color='primary'
-                variant="outlined"
-                shape="rounded"
-                count={123}
-            />
-        </Stack>
-    );
-}
+function usePagination(data, itemsPerPage) {
+    const [currentPage, setCurrentPage] = useState(1);
+    const maxPage = Math.ceil(data.length / itemsPerPage);
+  
+    function currentData() {
+      const begin = (currentPage - 1) * itemsPerPage;
+      const end = begin + itemsPerPage;
+      return data.slice(begin, end);
+    }
+  
+    function next() {
+      setCurrentPage(currentPage => Math.min(currentPage + 1, maxPage));
+    }
+  
+    function prev() {
+      setCurrentPage(currentPage => Math.max(currentPage - 1, 1));
+    }
+  
+    function jump(page) {
+      const pageNumber = Math.max(1, page);
+      setCurrentPage(currentPage => Math.min(pageNumber, maxPage));
+    }
+  
+    return { next, prev, jump, currentData, currentPage, maxPage };
+  }
+  
+  export default usePagination;
+  

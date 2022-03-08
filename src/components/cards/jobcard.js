@@ -1,29 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { CircularProgress } from "@mui/material"
-import { getAllJobs } from '../../services/jobs'
 import Trabajo from './trabajoInfo'
-import CardPagination from '../cards/paginacion';
+import Pagination from '@mui/material/Pagination'
+import Stack from '@mui/material/Stack'
+import usePagination from "./paginacion";
 
-class JobCard extends React.Component {
 
-    constructor(props) {
-        super(props)
+function JobCard() {
 
-        this.state = {
-            jobs: []
-        }
-    }
+    let [jobs, setJobs] = useState([]);
 
-    async componentDidMount() {
-        const jobs = await getAllJobs()
-        this.setState({ jobs: jobs })
-    }
+    useEffect(() => {
+        fetch('https://remotive.io/api/remote-jobs')
+            .then((res) => res.json())
+            .then((data) => {
+                let job = data.jobs
+                console.log("holahola")
+                console.log(job)
+                setJobs(job)
+            })
+
+    }, [])
+
+    let [page, setPage] = useState(1);
+    const PER_PAGE = 5;
+
+    const count = Math.ceil(jobs.length / PER_PAGE);
+    const _DATA = usePagination(jobs, PER_PAGE);
+
+    const handleChange = (e, p) => {
+        setPage(p);
+        _DATA.jump(p);
+    };
 
     // handleSearch = async (search) => {
     //   const responseJson = await getMemesBySearch(search)
     //   this.setState({ jobs: responseJson.result })
     // }
-    fecha = (fecha) => {
+    let fecha = (fecha) => {
         let newtime = new Date().getTime();
         let jobday = new Date(fecha).getTime();
         let diferencia_fecha = newtime - jobday;
@@ -31,30 +45,36 @@ class JobCard extends React.Component {
         return diferencia_fecha
     }
 
-    render() {
-        const { jobs } = this.state
-        const ini = 1
-        return (
-            <div>
-                {!jobs ?
-                    (<section className="my-20 flex justify-center">
-                        <CircularProgress />
-                    </section>)
-                    :
-                    jobs.slice(ini,ini+5).map((work) => <Trabajo
-                        id={work.id}
-                        company_name={work.company_name}
-                        imageUrl={work.company_logo}
-                        job_name={work.title}
-                        jobType={work.job_type}
-                        location={work.candidate_required_location}
-                        time={this.fecha(work.publication_date)}
-                    />)
-                }
-                <CardPagination/>
-            </div>
-        )
-    }
+    return (
+        <div>
+            {!jobs ?
+                (<section className="my-20 flex justify-center">
+                    <CircularProgress />
+                </section>)
+                :
+                _DATA.currentData().map((work) => <Trabajo
+                    id={work.id}
+                    company_name={work.company_name}
+                    imageUrl={work.company_logo}
+                    job_name={work.title}
+                    jobType={work.job_type}
+                    location={work.candidate_required_location}
+                    time={fecha(work.publication_date)}
+                />)
+            }
+            <Stack className="my-10 items-end" spacing={2}>
+                <Pagination
+                    color='primary'
+                    variant="outlined"
+                    shape="rounded"
+                    count={count}
+                    page={page}
+                    onChange={handleChange}
+                />
+            </Stack>
+        </div>
+    )
+
 }
 
 export default JobCard;
