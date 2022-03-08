@@ -14,9 +14,10 @@ export default function SidebarCheckbox() {
     : console.log('isNotcheked','partial time') ;
 
     return (
-        <FormControlLabel className="my-5"
+        <FormControlLabel className="my-5 dark:text-slate-200"
             control={
                 <Checkbox
+                    className='dark:text-slate-200'
                     checked={checked}
                     onChange={handleChange}
                     inputProps={{ 'aria-label': 'controlled' }} />}

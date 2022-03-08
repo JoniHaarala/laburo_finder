@@ -2,17 +2,13 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './components/pages/home';
 import InfoPage from './components/pages/infoPage';
 import './page404.css'
+import Toggle from './components/dm/dmToggle';
 
 const Head = () => {
   return (
-    <header className="font-[Poppins,system-ui] mb-8 pt-3 md:mt-0 md:py-8">
+    <header className="font-[Poppins,system-ui] flex justify-between mb-8 pt-3 md:mt-0 md:py-8 dark:text-white">
       <h1 className="font-bold text-2xl">Laburo <span className="font-light">Finder</span> </h1>
-      {/* <nav>
-        <ul>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/description'>description Page</Link></li>
-        </ul>
-      </nav> */}
+      <Toggle/>
       {/* despues agregar el toggle del darkMode desde el otro proyecto y 
       eliminar el NAV q es solo de prueba para el router*/}
     </header>
@@ -44,7 +40,7 @@ const Error404 = () => {
 
 function App() {
   return (
-    <div className='bg-slate-100 min-h-screen flex flex-col'>
+    <div className='bg-slate-100 dark:bg-slate-900 min-h-screen flex flex-col'>
       <div className="mx-3 lg:mx-20 font-[roboto, system-ui]">
         <Head />
         <div>

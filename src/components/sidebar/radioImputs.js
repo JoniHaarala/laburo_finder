@@ -12,7 +12,7 @@ export default function SidebarRadioButtons() {
     };
 
     return (
-        <div className="my-8">
+        <div className="my-8 dark:text-slate-200">
             <FormControl>
                 <RadioGroup
                     aria-labelledby="demo-controlled-radio-buttons-group"
@@ -20,10 +20,10 @@ export default function SidebarRadioButtons() {
                     value={value}
                     onChange={handleChange}
                 >
-                    <FormControlLabel value="USA" control={<Radio />} label="USA" />
-                    <FormControlLabel value="Europa" control={<Radio />} label="Europa" />
-                    <FormControlLabel value="America" control={<Radio />} label="America" />
-                    <FormControlLabel value="Asia" control={<Radio />} label="Asia" />
+                    <FormControlLabel value="USA" control={<Radio className='dark:text-slate-200'/>} label="USA" />
+                    <FormControlLabel value="Europe" control={<Radio className='dark:text-slate-200'/>} label="Europe" />
+                    <FormControlLabel value="America" control={<Radio className='dark:text-slate-200' />} label="America" />
+                    <FormControlLabel value="Asia" control={<Radio className='dark:text-slate-200' />} label="Asia" />
                 </RadioGroup>
             </FormControl>
         </div>
