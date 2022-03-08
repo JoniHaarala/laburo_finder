@@ -5,7 +5,6 @@ import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import usePagination from "./paginacion";
 
-
 function JobCard() {
 
     let [jobs, setJobs] = useState([]);
@@ -33,10 +32,6 @@ function JobCard() {
         _DATA.jump(p);
     };
 
-    // handleSearch = async (search) => {
-    //   const responseJson = await getMemesBySearch(search)
-    //   this.setState({ jobs: responseJson.result })
-    // }
     let fecha = (fecha) => {
         let newtime = new Date().getTime();
         let jobday = new Date(fecha).getTime();
