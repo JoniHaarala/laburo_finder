@@ -29,10 +29,15 @@ function InfoPage() {
                 setJobs(jobs)
             })
 
-    }, [jobid])
+    }, [jobid]);
+
+    let jobtype = (jt) => {
+        let tipo = '';
+        jt === "" ? tipo = "not specified" : tipo = jt;
+        return tipo
+    }
 
     return (
-        
             <div>
                 {/* <h1 className='bg-green-500'>{`La DescPage pagina paaa del id: ${jobid}`}</h1> */}
                 {
@@ -40,7 +45,7 @@ function InfoPage() {
                         company_name={jobs?.company_name}
                         imageUrl={jobs?.company_logo}
                         job_name={jobs?.title}
-                        jobType={jobs?.job_type}
+                        jobType={jobtype(jobs?.job_type)}
                         location={jobs?.candidate_required_location}
                         time={fecha(jobs?.publication_date)}
                         descripcion={jobs?.description}

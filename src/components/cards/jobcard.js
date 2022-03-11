@@ -40,6 +40,12 @@ function JobCard() {
         return diferencia_fecha
     }
 
+    let jobtype = (jt) => {
+        let tipo = '';
+        jt === "" ? tipo = "not specified" : tipo = jt;
+        return tipo
+    }
+
     return (
         <div>
             {!jobs ?
@@ -52,7 +58,7 @@ function JobCard() {
                     company_name={work.company_name}
                     imageUrl={work.company_logo}
                     job_name={work.title}
-                    jobType={work.job_type}
+                    jobType={jobtype(work.job_type)}
                     location={work.candidate_required_location}
                     time={fecha(work.publication_date)}
                 />)
