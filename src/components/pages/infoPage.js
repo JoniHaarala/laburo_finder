@@ -21,11 +21,8 @@ function InfoPage() {
             .then((res) => res.json())
             .then((data) => {
                 let job = data.jobs
-                console.log("holahola" + jobid)
-                console.log(job)
                 // eslint-disable-next-line eqeqeq
                 const jobs = job.find(j => j.id == jobid)
-                console.log(jobs)
                 setJobs(jobs)
             })
 
@@ -39,7 +36,6 @@ function InfoPage() {
 
     return (
             <div>
-                {/* <h1 className='bg-green-500'>{`La DescPage pagina paaa del id: ${jobid}`}</h1> */}
                 {
                     <InfoBody
                         company_name={jobs?.company_name}

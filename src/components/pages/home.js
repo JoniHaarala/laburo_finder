@@ -1,4 +1,3 @@
-
 import { getValue } from '@testing-library/user-event/dist/utils';
 import JobCard from '../cards/jobcard';
 import SearchBar from '../searchBar';
@@ -14,7 +13,7 @@ export default function Home () {
             <div className='flex flex-col sm:flex-row gap-4 my-10'>
                 <Sidebar />
                 <div className='w-full mb-10'>
-                    <JobCard />
+                    <JobCard/>
                 </div>
             </div>
             

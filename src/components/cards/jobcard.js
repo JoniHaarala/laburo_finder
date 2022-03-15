@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { CircularProgress } from "@mui/material"
 import Trabajo from './trabajoInfo'
 import Pagination from '@mui/material/Pagination'
@@ -8,14 +8,39 @@ import usePagination from "./paginacion";
 function JobCard() {
 
     let [jobs, setJobs] = useState([]);
+    // const [filteredData, setFilteredData] = useState([]);
+    // const [wordEntered, setWordEntered] = useState("");
+
+    // const handleFilter = (event,data) => {
+    //     const searchWord = event.target.value;
+    //     setWordEntered(searchWord);
+    //     const newFilter = data.filter((value) => {
+    //         return value.name.toLowerCase().includes(searchWord.toLowerCase());
+    //     });
+
+    //     //searchWord === "" ? setFilteredData([]) : setFilteredData(newFilter);
+    //     if (searchWord === "") {
+    //         setFilteredData([]);
+    //     } else {
+    //         setFilteredData(newFilter);
+    //     }
+    // };
+
+    // useEffect(()=>{
+    //     fetch('https://remotive.io/api/remote-jobs')
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             let job = data.jobs
+    //             const filteredJobs = job.find(j => j.candidate_required_location === handleFilter);
+    //             setJobs(filteredJobs)
+    //         })
+    // },[handleFilter])
 
     useEffect(() => {
         fetch('https://remotive.io/api/remote-jobs')
             .then((res) => res.json())
             .then((data) => {
                 let job = data.jobs
-                console.log("holahola")
-                console.log(job)
                 setJobs(job)
             })
 
@@ -42,7 +67,7 @@ function JobCard() {
 
     let jobtype = (jt) => {
         let tipo = '';
-        jt === "" ? tipo = "not specified" : tipo = jt;
+        jt === "" ? tipo = "not specified" : tipo = jt.replace("_", " ");
         return tipo
     }
 
