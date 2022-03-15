@@ -17,6 +17,9 @@ export default function Home () {
                 </div>
             </div>
             
+            <div>
+                <h1>hola hola</h1>
+            </div>
         </div>
     );
 }
