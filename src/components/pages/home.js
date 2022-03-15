@@ -23,3 +23,5 @@ export default function Home () {
         </div>
     );
 }
+
+/* nota: estoy en la nueva rama searchbar OJO */
