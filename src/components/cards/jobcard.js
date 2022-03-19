@@ -73,7 +73,7 @@ function JobCard() {
 
     return (
         <div>
-            {!jobs ?
+            {jobs.length === 0 ?
                 (<section className="my-20 flex justify-center">
                     <CircularProgress />
                 </section>)
