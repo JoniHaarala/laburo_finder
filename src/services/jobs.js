@@ -1,4 +1,5 @@
 const baseUrl = 'http://127.0.0.1:3001'
+//contraseña de user para MongoBD atlas = MN3O1KF864w5jn3y
 
 /*
 https://remotive.io/api/remote-jobs?limit=50

@@ -25,7 +25,7 @@ class Sidebar extends React.Component {
     
     return (
       <aside className="font-[Poppins,system-ui]">
-        <SidebarCheckbox />
+        {/* <SidebarCheckbox /> */}
         <div className="my-4">
           <p className="font-bold text-gray-400">LOCATION</p>
           <SidebarSearchBar placeholder="City, state, zip code or country" data={country} />

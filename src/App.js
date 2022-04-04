@@ -1,44 +1,12 @@
-import { Link, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from './components/pages/home';
 import InfoPage from './components/pages/infoPage';
-import './page404.css'
-import Toggle from './components/dm/dmToggle';
-
-const Head = () => {
-  return (
-    <header className="font-[Poppins,system-ui] flex justify-between mb-8 pt-3 md:mt-0 md:py-8 dark:text-white">
-      <Link to={'/'}><h1 className="font-bold text-2xl">Laburo <span className="font-light">Finder</span> </h1></Link>
-      <Toggle/>
-      {/* despues agregar el toggle del darkMode desde el otro proyecto y 
-      eliminar el NAV q es solo de prueba para el router*/}
-    </header>
-  );
-}
-const Footer = () => {
-  return (
-    <footer className="text-center font-[roboto] mt-10">
-      <p className='text-gray-400 py-5 text-sm font-bold'>Created by JoniHaarala - devChallenges.io</p>
-    </footer>
-  );
-}
-
-const Error404 = () => {
-  return (
-    <section id="not-found">
-      <div id="title">&bull; 404 Error Page &bull;</div>
-      <div className="circles dark:bg-slate-800 dark:after:bg-slate-800">
-        <p className="dark:text-slate-800">404<br />
-          <small>PAGE NOT FOUND</small>
-        </p>
-        <span className="circle big"></span>
-        <span className="circle med"></span>
-        <span className="circle small"></span>
-      </div>
-    </section>
-  );
-}
+import Head from './components/body/header';
+import Footer from './components/body/footer';
+import Error404 from './components/body/error404';
 
 function App() {
+
   return (
     <div className='bg-slate-100 dark:bg-slate-900 min-h-screen flex flex-col'>
       <div className="mx-3 lg:mx-20 font-[roboto, system-ui]">
