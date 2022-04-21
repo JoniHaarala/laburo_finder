@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import JobCard from '../cards/jobCardList';
 import SearchBar from '../searchBar';
 import Sidebar from '../sidebar/sidebar';
@@ -6,22 +6,35 @@ import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 
 export default function Home() {
 
-    const [Jobs, setJobs] = useState({
-        results: []
-    });
+    const [Jobs, setJobs] = useState([]);
 
-
-    const onSearch = async (text) => {
-        fetch('https://remotive.io/api/remote-jobs')
+    useEffect(() => {
+        fetch('https://remotive.com/api/remote-jobs')
             .then((res) => res.json())
             .then((data) => {
                 let job = data.jobs
-                const titleJobs = job.find(j => j.candidate_required_location === text);
-                setJobs(prevState => {
-                    return { ...prevState, results: titleJobs }
-                })
+                console.log(job)
+                setJobs( job )
             })
-        return onSearch();
+
+    }, [])
+
+
+    const onSearch = async (texto) => {
+        try {
+            const text = texto.charAt(0).toUpperCase() + texto.slice(1)
+            fetch('https://remotive.com/api/remote-jobs')
+                .then((res) => res.json())
+                .then((data) => {
+                    let job = data.jobs
+                    let titleJobs = job.find(j => j.title === text);
+                    setJobs( titleJobs )
+                })
+            return onSearch();
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
 
 
@@ -32,7 +45,7 @@ export default function Home() {
 
                 <div className='flex justify-between h-10 w-3/4 md:h-14 px-2 md:px-4 bg-white items-center self-center'>
                     <WorkOutlineIcon />
-                    <SearchBar props={onSearch} placeholder='Title, companies, expertise or benefits'></SearchBar>
+                    <SearchBar onSearch={onSearch} />
                     {/* <button className=" h-7 w-16 md:h-11 sm:w-1/6 sm:text-sm bg-blue-400 text-center text-white text-xs">Buscar</button> */}
                 </div>
 
@@ -41,7 +54,7 @@ export default function Home() {
             <div className='flex flex-col sm:flex-row gap-4 my-10'>
                 <Sidebar />
                 <div className='w-full mb-10'>
-                    <JobCard results={Jobs.results} />
+                    <JobCard results={Jobs} />
                 </div>
             </div>
         </div>

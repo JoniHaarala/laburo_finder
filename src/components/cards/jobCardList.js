@@ -7,19 +7,21 @@ import usePagination from "./paginacion";
 
 function JobCard({ result }) {
 
-    let jobs = [];
-    if (result.data) {
-        jobs = result.data.Search || [];
-    }
+    let [jobs, setJobs] = useState([]);
+    
+    // useEffect(() => {
+    //     fetch('https://remotive.io/api/remote-jobs')
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             let job = data.jobs
+    //             setJobs(job)
+    //         })
 
-    useEffect(()=>{
-        fetch('https://remotive.io/api/remote-jobs')
-            .then((res) => res.json())
-            .then((data) => {
-                let job = data.jobs
-                jobs = 1;
-            })
-    },[])
+    // }, [])
+
+    if (result) {
+        setJobs(result || []);
+    }
 
     let [page, setPage] = useState(1);
     const PER_PAGE = 5;
@@ -34,12 +36,13 @@ function JobCard({ result }) {
 
     return (
         <div>
-            {!jobs ?
-                (<section className="my-20 flex justify-center">
+            {jobs.length === 0 ?
+                (<section className="my-20 flex flex-col items-center">
+                    <p className='dark:text-slate-200 mb-7 text-lg'>Loading Data, Please Wait</p>
                     <CircularProgress />
                 </section>)
                 :
-                _DATA.currentData().map((work) => <Trabajo key={work.id} jobs={work} />
+                _DATA.currentData().map((work) => <Trabajo key={work.id} props={work} />
                 )
             }
             <Stack className="my-10 items-end" spacing={2}>

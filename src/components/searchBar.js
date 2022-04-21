@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import CloseIcon from '@mui/icons-material/Close';
 
-function Searchbar(props, placeholder) {
+function Searchbar(props) {
     const {
         onSearch
     } = props;
@@ -19,15 +20,24 @@ function Searchbar(props, placeholder) {
         }
     }
 
+    const clearInput = () => {
+        setSearchText("");
+    };
+    
     return (
-        <input
-            className="px-2 w-2/3 sm:w-4/5 sm:h-8 text-sm placeholder:text-xs placeholder:text-center"
-            onChange={handleInput}
-            onKeyPress={handleEnterKeyPressed}
-            type="text"
-            value={searchText}
-            placeholder={placeholder}
-        />
+        <div className="px-2 flex items-center justify-between w-full sm:h-8 text-sm">
+            <input
+                className="w-full sm:h-8 text-sm placeholder:text-xs placeholder:text-center"
+                onChange={handleInput}
+                onKeyPress={handleEnterKeyPressed}
+                type="text"
+                value={searchText}
+                placeholder="Title, companies, expertise or benefits"
+            />
+            <CloseIcon className="cursor-pointer" onClick={clearInput} />
+        </div>
+
+
     );
 }
 
