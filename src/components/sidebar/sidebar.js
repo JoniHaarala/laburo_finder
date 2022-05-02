@@ -2,7 +2,7 @@ import React from 'react';
 import SidebarCheckbox from './checkbox';
 import SidebarSearchBar from './countrySearch';
 import SidebarRadioButtons from './radioImputs';
-import { getAllJobs } from '../../services/jobs';
+import { getJobs } from '../../services/jobs';
 
 class Sidebar extends React.Component {
 
@@ -15,7 +15,7 @@ class Sidebar extends React.Component {
   }
 
   async componentDidMount() {
-    const jobs = await getAllJobs()
+    const jobs = await getJobs()
     this.setState({ country: jobs })
   }
 

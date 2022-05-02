@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import JobCard from '../cards/jobCardList';
 import SearchBar from '../searchBar';
 import Sidebar from '../sidebar/sidebar';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+// import { getJobs } from '../../services/jobs';
 
 export default function Home() {
 
-    const [Jobs, setJobs] = useState([]);
+    const [Jobs, setJobs] = useState();
 
     useEffect(() => {
         fetch('https://remotive.com/api/remote-jobs')
@@ -20,16 +21,10 @@ export default function Home() {
     }, [])
 
 
-    const onSearch = async (texto) => {
+    let onSearch = async (texto) => {
         try {
-            const text = texto.charAt(0).toUpperCase() + texto.slice(1)
-            fetch('https://remotive.com/api/remote-jobs')
-                .then((res) => res.json())
-                .then((data) => {
-                    let job = data.jobs
-                    let titleJobs = job.find(j => j.title === text);
-                    setJobs( titleJobs )
-                })
+            let titleJobs = Jobs.filter(j => j.candidate_required_location === texto);
+            setJobs(titleJobs)
             return onSearch();
         }
         catch (error) {

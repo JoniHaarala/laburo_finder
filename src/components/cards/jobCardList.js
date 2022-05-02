@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { CircularProgress } from "@mui/material"
 import Trabajo from './card'
 import Pagination from '@mui/material/Pagination'
@@ -20,7 +20,7 @@ function JobCard({ result }) {
     // }, [])
 
     if (result) {
-        setJobs(result || []);
+        setJobs(result);
     }
 
     let [page, setPage] = useState(1);
@@ -42,7 +42,7 @@ function JobCard({ result }) {
                     <CircularProgress />
                 </section>)
                 :
-                _DATA.currentData().map((work) => <Trabajo key={work.id} props={work} />
+                _DATA.currentData().map((work) => <Trabajo props={work} />
                 )
             }
             <Stack className="my-10 items-end" spacing={2}>
