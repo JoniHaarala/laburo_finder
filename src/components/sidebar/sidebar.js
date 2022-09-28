@@ -1,5 +1,5 @@
 import React from 'react';
-import SidebarCheckbox from './checkbox';
+//import SidebarCheckbox from './checkbox';
 import SidebarSearchBar from './countrySearch';
 import SidebarRadioButtons from './radioImputs';
 import { getJobs } from '../../services/jobs';
