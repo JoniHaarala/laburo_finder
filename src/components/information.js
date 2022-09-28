@@ -26,13 +26,11 @@ const InfoBody = ({
                     <p className="uppercase my-4 text-gray-400">How to Apply</p>
                     <p>
                         Please email a copy of your resume and online portfolio 
-                        to <span className='text-blue-500'>web@example.com</span> & 
-                        CC <span className='text-blue-500'>web@example.com</span> 
-                        {/* or visit <span className='text-blue-500'>{joburl}</span> for more information */}
+                        to <a href={joburl} className='text-blue-500'>{joburl}</a> 
                     </p>
                 </div>
             </aside>
-
+            
             <div>
                 <div className="my-10">
                     <p className="text-2xl font-bold">{job_name}</p>
