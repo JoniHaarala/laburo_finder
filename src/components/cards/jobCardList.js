@@ -15,7 +15,7 @@ function JobCard({ result }) {
         }
     }, [result])
 
-    console.log(result)
+    //console.log(result)
 
     let [page, setPage] = useState(1);
     const PER_PAGE = 5;

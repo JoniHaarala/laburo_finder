@@ -19,7 +19,7 @@ export default function Home() {
             })
 
     }, [])
-    console.log(Jobs)
+    //console.log(Jobs)
 
     if (Title !== '') {
         fetch('https://remotive.com/api/remote-jobs')
