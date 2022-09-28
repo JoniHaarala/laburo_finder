@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 
-function Searchbar(props) {
-    const {
-        onSearch
-    } = props;
+function Searchbar(texto) {
+    
+    const onSearch = texto;
 
     const [searchText, setSearchText] = useState('')
 
@@ -17,13 +16,14 @@ function Searchbar(props) {
     const handleEnterKeyPressed = (e) => {
         if (e.key === 'Enter') {
             onSearch(searchText)
+            console.log(onSearch)
         }
     }
 
     const clearInput = () => {
-        setSearchText("");
+      setSearchText("");
     };
-    
+
     return (
         <div className="px-2 flex items-center justify-between w-full sm:h-8 text-sm">
             <input
@@ -36,7 +36,6 @@ function Searchbar(props) {
             />
             <CloseIcon className="cursor-pointer" onClick={clearInput} />
         </div>
-
 
     );
 }
