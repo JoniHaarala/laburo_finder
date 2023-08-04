@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import InfoBody from '../information'
+import { InfoLoader } from '../InfoLoader'
 
 
 let fecha = (fecha) => {
@@ -14,10 +15,10 @@ let fecha = (fecha) => {
 function InfoPage() {
 
     const { jobid } = useParams();
-    const [jobs, setJobs] = useState({})
+    const [jobs, setJobs] = useState([])
 
     useEffect(() => {
-        fetch('https://remotive.io/api/remote-jobs')
+        fetch('https://remotive.com/api/remote-jobs')
             .then((res) => res.json())
             .then((data) => {
                 let job = data.jobs
@@ -34,21 +35,23 @@ function InfoPage() {
         return tipo
     }
 
+    if (jobs.length === 0) return <InfoLoader />
+
     return (
-            <div>
-                {
-                    <InfoBody
-                        company_name={jobs?.company_name}
-                        imageUrl={jobs?.company_logo}
-                        job_name={jobs?.title}
-                        jobType={jobtype(jobs?.job_type)}
-                        location={jobs?.candidate_required_location}
-                        time={fecha(jobs?.publication_date)}
-                        descripcion={jobs?.description}
-                        joburl={jobs?.url}
-                    />
-                }
-            </div>
+        <div>
+            {
+                <InfoBody
+                    company_name={jobs?.company_name}
+                    imageUrl={jobs?.company_logo}
+                    job_name={jobs?.title}
+                    jobType={jobtype(jobs?.job_type)}
+                    location={jobs?.candidate_required_location}
+                    time={fecha(jobs?.publication_date)}
+                    descripcion={jobs?.description}
+                    joburl={jobs?.url}
+                />
+            }
+        </div>
     )
 }
 
