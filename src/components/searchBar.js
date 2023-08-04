@@ -1,40 +1,36 @@
 import React, { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
+import SearchIcon from '@mui/icons-material/Search';
 
-function Searchbar(texto) {
-    
-    const onSearch = texto;
+function Searchbar({ query, setQuery, placeholder, setStyles }) {
 
     const [searchText, setSearchText] = useState('')
 
-    const handleInput = (e) => {
-        const text = e.target.value
-        setSearchText(text)
-        console.log(searchText)
-    }
-
-    const handleEnterKeyPressed = (e) => {
-        if (e.key === 'Enter') {
-            onSearch(searchText)
-            console.log(onSearch)
-        }
+    const handleChange = (e) => {
+        e.preventDefault()
+        setSearchText(e.target.value);
+        setQuery(e.target.value)
     }
 
     const clearInput = () => {
-      setSearchText("");
+        setSearchText("");
+        setQuery("")
     };
 
     return (
         <div className="px-2 flex items-center justify-between w-full sm:h-8 text-sm">
             <input
-                className="w-full sm:h-8 text-sm placeholder:text-xs placeholder:text-center"
-                onChange={handleInput}
-                onKeyPress={handleEnterKeyPressed}
+                className={setStyles}
+                onChange={handleChange}
                 type="text"
-                value={searchText}
-                placeholder="Title, companies, expertise or benefits"
+                value={query}
+                placeholder={placeholder}
             />
-            <CloseIcon className="cursor-pointer" onClick={clearInput} />
+            {
+                searchText.length > 0
+                    ? <CloseIcon className="cursor-pointer" onClick={clearInput} />
+                    : <SearchIcon />
+            }
         </div>
 
     );

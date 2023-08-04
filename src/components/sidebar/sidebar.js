@@ -1,39 +1,23 @@
-import React from 'react';
-//import SidebarCheckbox from './checkbox';
-import SidebarSearchBar from './countrySearch';
 import SidebarRadioButtons from './radioImputs';
-import { getJobs } from '../../services/jobs';
+import Searchbar from '../searchBar';
+import { SIDEBAR_SEARCH_STYLE } from '../../constants/constants';
 
-class Sidebar extends React.Component {
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      country: []
-    }
-  }
-
-  async componentDidMount() {
-    const jobs = await getJobs()
-    this.setState({ country: jobs })
-  }
-
-  render() {
-
-    const { country } = this.state
-    
-    return (
-      <aside className="font-[Poppins,system-ui]">
-        {/* <SidebarCheckbox /> */}
-        <div className="my-4">
-          <p className="font-bold text-gray-400">LOCATION</p>
-          <SidebarSearchBar placeholder="City, state, zip code or country" data={country} />
-        </div>
-        <SidebarRadioButtons />
-      </aside>
-    );
-  }
+export default function Sidebar({ query, setQuery }) {
+  //console.log(query);
+  
+  return (
+    <aside className="font-[Poppins,system-ui]">
+      <div className="my-4">
+        <p className="font-bold text-gray-400 mb-5">LOCATION</p>
+        <Searchbar
+          query={query}
+          setQuery={setQuery}
+          placeholder={'City, state, zip code or country'}
+          setStyles={SIDEBAR_SEARCH_STYLE}
+        />
+        {/* <SidebarSearchBar placeholder="City, state, zip code or country" data={country} /> */}
+      </div>
+      <SidebarRadioButtons setCountry={setQuery}/>
+    </aside>
+  );
 }
-
-export default Sidebar;

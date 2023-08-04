@@ -1,14 +1,15 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 
-export default function SidebarRadioButtons() {
-    const [value, setValue] = React.useState('all');
+export default function SidebarRadioButtons({ setCountry }) {
+    const [value, setValue] = useState('');
 
     const handleChange = (event) => {
         setValue(event.target.value);
+        setCountry(event.target.value)
     };
 
     return (
@@ -20,8 +21,9 @@ export default function SidebarRadioButtons() {
                     value={value}
                     onChange={handleChange}
                 >
-                    <FormControlLabel value="USA" control={<Radio className='dark:text-slate-200'/>} label="USA" />
-                    <FormControlLabel value="Europe" control={<Radio className='dark:text-slate-200'/>} label="Europe" />
+                    <FormControlLabel value='' control={<Radio className='dark:text-slate-200' />} label="worldwide" />
+                    <FormControlLabel value="USA" control={<Radio className='dark:text-slate-200' />} label="USA" />
+                    <FormControlLabel value="Europe" control={<Radio className='dark:text-slate-200' />} label="Europe" />
                     <FormControlLabel value="America" control={<Radio className='dark:text-slate-200' />} label="America" />
                     <FormControlLabel value="Asia" control={<Radio className='dark:text-slate-200' />} label="Asia" />
                 </RadioGroup>
