@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { CircularProgress } from "@mui/material"
 import Trabajo from './card'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import usePagination from "./paginacion";
+import { Loader } from '../MainLoader';
 
 function JobCard({ result }) {
 
     let [jobs, setJobs] = useState([]);
-    
+
     useEffect(() => {
         if (result) {
             setJobs(result);
         }
     }, [result])
-
-    //console.log(result)
 
     let [page, setPage] = useState(1);
     const PER_PAGE = 5;
@@ -43,14 +41,11 @@ function JobCard({ result }) {
         return diferencia_fecha
     }
 
+    if (jobs.length === 0) return <Loader />
+
     return (
         <div>
-            {jobs.length === 0 ?
-                (<section className="my-20 flex flex-col items-center">
-                    <p className='dark:text-slate-200 mb-7 text-lg'>Loading Data, Please Wait</p>
-                    <CircularProgress />
-                </section>)
-                :
+            {
                 _DATA.currentData().map((work) => <Trabajo key={work.id}
                     id={work.id}
                     company_name={work.company_name}
