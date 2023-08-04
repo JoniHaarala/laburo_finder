@@ -1,0 +1,2 @@
+export const MAIN_SEARCH_STYLE = 'w-full sm:h-8 text-sm placeholder:text-xs placeholder:text-center'
+export const SIDEBAR_SEARCH_STYLE = 'px-4 w-full h-8 md:w-72 dark:bg-slate-800 text-black dark:text-slate-200 rounded-lg text-md text-xs md:text-sm placeholder:text-xs'
